@@ -76,7 +76,7 @@ export default function Page() {
               className="flex-1 p-4 rounded-lg border-3 border-[#0f0f0f] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
-              className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold hover:scale-105 transition-all hover:gradient-to-l hover:from-purple-700 hover:to-blue-700"
+              className="cursor-pointer px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold hover:scale-105 transition-all hover:gradient-to-l hover:from-purple-700 hover:to-blue-700"
               type="submit"
               disabled={!status || status !== 'ready' || !input.trim()}
             >

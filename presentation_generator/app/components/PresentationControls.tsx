@@ -23,7 +23,7 @@ export default function PresentationControls({
         <button
           onClick={onPrevious}
           disabled={!canGoPrevious}
-          className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="cursor-pointer px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <ArrowLeft className="inline-block size-5 mr-1" /> Poprzedni
         </button>
@@ -37,7 +37,7 @@ export default function PresentationControls({
         <button
           onClick={onNext}
           disabled={!canGoNext}
-          className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="cursor-pointer px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Następny <ArrowRight className="inline-block size-5 ml-1" />
         </button>

@@ -1,7 +1,5 @@
 import { Slide as SlideType } from '../types/presentation';
 import React from 'react';
-import Image from 'next/image';
-import nykCap from '../assets/nyk-cap.jpg';
 import { ImageUpload } from './ImageUpload';
 
 interface SlideProps {
