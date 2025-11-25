@@ -1,5 +1,8 @@
 import { Slide as SlideType } from '../types/presentation';
 import React from 'react';
+import Image from 'next/image';
+import nykCap from '../assets/nyk-cap.jpg';
+import { ImageUpload } from './ImageUpload';
 
 interface SlideProps {
   slide: SlideType;
@@ -38,29 +41,30 @@ export default function Slide({ slide, isActive = false }: SlideProps) {
   return (
     <div
       className={`
-        w-full h-full min-h-[600px] p-12 bg-white rounded-lg shadow-xl
-        flex flex-col justify-center items-start
+        w-full h-full min-h-[600px] p-12 bg-white rounded-lg
+        flex flex-col
         transition-all duration-300
         ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-70'}
       `}
     >
-      <div className="mb-8">
-        <span className="text-sm text-gray-500 font-mono">
-          Slajd {slide.slideNumber} / 
-        </span>
-      </div>
       
       <h2 className="text-4xl font-bold text-gray-900 mb-8">
         {parseBoldText(slide.title)}
       </h2>
-      
-      <ul className="space-y-4 text-xl text-gray-700 list-disc list-inside">
-        {slide.content.map((item, index) => (
-          <li key={index} className="leading-relaxed">
-            {parseBoldText(item)}
-          </li>
-        ))}
-      </ul>
+
+      <div className='w-full flex flex-row items-center'>
+        <ul className="space-y-4 text-xl text-gray-700 list-disc list-inside w-[60%]">
+          {slide.content.map((item, index) => (
+            <li key={index} className="leading-relaxed">
+              {parseBoldText(item)}
+            </li>
+          ))}
+        </ul>
+
+        <div className="ml-8 w-[40%] flex items-start justify-end">
+          <ImageUpload />
+        </div>
+      </div>
     </div>
   );
 }

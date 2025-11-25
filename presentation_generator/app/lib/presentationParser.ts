@@ -1,4 +1,5 @@
 import { Presentation, Slide } from '../types/presentation';
+import { z } from 'zod';
 
 export function parsePresentationFromText(text: string, title: string): Presentation {
   const slides: Slide[] = [];
@@ -112,17 +113,29 @@ export function parsePresentationFromText(text: string, title: string): Presenta
 export function parsePresentationFromJSON(jsonString: string): Presentation | null {
   try {
     const data = JSON.parse(jsonString);
-    
-    if (data.slides && Array.isArray(data.slides)) {
-      const slides: Slide[] = data.slides.map((slide: any, index: number) => ({
-        id: slide.id || `slide-${index + 1}`,
-        title: slide.title || `Slajd ${index + 1}`,
-        content: Array.isArray(slide.content) ? slide.content : [slide.content || ''],
+  
+    const SlideSchema = z.object({
+      id: z.string().optional(),
+      title: z.string().optional(),
+      content: z.union([z.array(z.string()), z.string()]).optional(),
+    });
+
+    const PresentationInputSchema = z.object({
+      title: z.string().optional(),
+      slides: z.array(SlideSchema).optional(),
+    });
+
+    const parsed = PresentationInputSchema.safeParse(data);
+    if (parsed.success && Array.isArray(parsed.data.slides) && parsed.data.slides.length > 0) {
+      const slides: Slide[] = parsed.data.slides.map((s: any, index: number) => ({
+        id: s.id || `slide-${index + 1}`,
+        title: s.title || `Slajd ${index + 1}`,
+        content: Array.isArray(s.content) ? s.content : [s.content || ''],
         slideNumber: index + 1,
       }));
 
       return {
-        title: data.title || 'Prezentacja',
+        title: parsed.data.title || 'Prezentacja',
         slides,
       };
     }
